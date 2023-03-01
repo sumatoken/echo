@@ -16,16 +16,21 @@ speech_recognizer = speechsdk.SpeechRecognizer(
 )
 
 
-def run():
-    recognised_keyword = recognise_wake_word()
-    print(recognised_keyword)
-    if recognised_keyword:
-        print("How may I help you?")
-        textToSpeech(
-            "How may I help you?",
-            speech_config=speech_config,
-            audio_config=audio_config,
-        )
+initiated = False
+
+
+def run(initiated):
+    recognised_wake_word = recognise_wake_word()
+    print(recognised_wake_word)
+    while recognised_wake_word:
+        if initiated != True:
+            print("How may I help you?")
+            textToSpeech(
+                "How may I help you?",
+                speech_config=speech_config,
+                audio_config=audio_config,
+            )
+        initiated = True
         speech_recognition_result = speech_recognizer.recognize_once_async().get()
 
         if speech_recognition_result.reason == speechsdk.ResultReason.RecognizedSpeech:
@@ -44,10 +49,7 @@ def run():
             )
         elif speech_recognition_result.reason == speechsdk.ResultReason.Canceled:
             cancellation_details = speech_recognition_result.cancellation_details
-            print("Speech Recognition canceled: {}".format(cancellation_details.reason))
-            if cancellation_details.reason == speechsdk.CancellationReason.Error:
-                print("Error details: {}".format(cancellation_details))
+            print("Speech Recognition canceled: {}".format(cancellation_details))
 
 
-while True:
-    run()
+run(initiated)

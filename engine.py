@@ -7,9 +7,7 @@ import os
 
 def generatePrompt(query):
     config = ChatEngineConfig(ModelConfig(max_tokens=1024))
-    description = (
-        "You are a robot capable of holding conversations with intellectual humans"
-    )
+    description = "You are a robot capable of holding conversations with intellectual humans. You always make your answer as short as possible"
     examples = [
         Interaction("Hello", "Hey, how are you?"),
         Interaction("I am feeling okay, and you?", "I'm in my best shape!"),
