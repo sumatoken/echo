@@ -6,13 +6,15 @@ from engine import (
     textToSpeech,
     addToContext,
 )
+from playsound import playsound
 
 
 def run():
     recognisedWakeWord = listenForWakeWord()
     while recognisedWakeWord:
+        playsound("wake.mp3")
         recognisedSpeech = listenToSpeech()
-        if recognisedSpeech == "exit.":
+        if recognisedSpeech == "Exit.":
             exit()
         prompt = generatePrompt(recognisedSpeech)
         response = generateResponse(prompt)

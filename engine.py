@@ -72,7 +72,6 @@ def listenForWakeWord():
 
     if result.reason == speechsdk.ResultReason.RecognizedKeyword:
         stop_future = wakeWordRecognizer.stop_recognition_async()
-        print("Stopping...")
         stopped = stop_future.get()
         return True
 
