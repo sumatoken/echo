@@ -14,7 +14,7 @@ speech_config = speechsdk.SpeechConfig(
     subscription=os.environ.get("AZURE_SPEECH_KEY"),
     region=os.environ.get("AZURE_SPEECH_REGION"),
 )
-speech_config.speech_recognition_language = "en-US"
+speech_config.speech_recognition_language = "fr-FR"
 audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
 audio_config = speechsdk.audio.AudioConfig(use_default_microphone=True)
 speechRecognizer = speechsdk.SpeechRecognizer(
@@ -77,7 +77,7 @@ def listenForWakeWord():
 
 
 def textToSpeech(text):
-    speech_config.speech_synthesis_voice_name = "en-US-JennyNeural"
+    speech_config.speech_synthesis_voice_name = "fr-FR-BrigitteNeural"
     speech_synthesizer = speechsdk.SpeechSynthesizer(
         speech_config=speech_config, audio_config=audio_config
     )
